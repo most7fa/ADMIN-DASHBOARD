@@ -1,12 +1,25 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
-export class App {
-  protected readonly title = signal('admin-dashboard');
+export class AppComponent {
+  isLoginPage = false;
+
+  constructor(private router: Router) {
+    // مراقبة مسار الصفحة الحالية
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // إذا كان المسار فارغاً '' (وهو مسار صفحة الـ Login عندك) أو يحتوي على كلمة login
+        this.isLoginPage = event.url === '/' || event.url.includes('/login');
+      }
+    });
+  }
 }
