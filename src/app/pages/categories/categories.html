@@ -1,0 +1,94 @@
+<div class="dashboard">
+
+  <header class="header">
+    <h1>📂 Categories Dashboard</h1>
+  </header>
+
+  <div class="stats">
+
+    <div class="card">
+      <h3>Total Categories</h3>
+      <p>{{ totalCategories }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Status</h3>
+      <p>Online</p>
+    </div>
+
+  </div>
+
+  <div class="search-box">
+
+    <input
+      type="text"
+      placeholder="🔍 Search Category..."
+      [(ngModel)]="searchText"
+      (input)="searchCategories()">
+
+  </div>
+
+  <div class="form-box">
+
+    <h2>{{ editingId ? 'Update Category' : 'Add Category' }}</h2>
+
+    <input
+      type="text"
+      placeholder="Category Name"
+      [(ngModel)]="newCategory.name">
+
+    <button
+      *ngIf="!editingId"
+      class="add-btn"
+      (click)="addCategory()">
+
+      Add Category
+
+    </button>
+
+    <button
+      *ngIf="editingId"
+      class="update-btn"
+      (click)="updateCategory()">
+
+      Update Category
+
+    </button>
+
+  </div>
+
+  <h2 class="title">Categories</h2>
+
+  <div class="products">
+
+    <div
+      class="product-card"
+      *ngFor="let cat of categories">
+
+      <h3>{{ cat.name }}</h3>
+
+      <div class="actions">
+
+        <button
+          class="edit-btn"
+          (click)="editCategory(cat)">
+
+          Edit
+
+        </button>
+
+        <button
+          class="delete-btn"
+          (click)="deleteCategory(cat.id)">
+
+          Delete
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
