@@ -1,0 +1,99 @@
+.dashboard {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.header h1 {
+    font-size: 24px;
+    color: #0f172a;
+    margin: 0;
+}
+
+.stats {
+    display: flex;
+    gap: 15px;
+}
+
+.stats .card {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    min-width: 150px;
+}
+
+.stats .card h3 { font-size: 13px; color: #64748b; margin: 0 0 5px 0; }
+.stats .card p { font-size: 20px; font-weight: bold; margin: 0; color: #0f172a; }
+
+.form-box {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.form-box h2 { font-size: 16px; margin-top: 0; margin-bottom: 15px; color: #0f172a; }
+
+.form-box input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.add-btn, .update-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+}
+
+.add-btn { background-color: #3b82f6; }
+.add-btn:hover { background-color: #2563eb; }
+.update-btn { background-color: #10b981; }
+
+.title { font-size: 18px; margin: 10px 0; color: #0f172a; }
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.product-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card h3 { font-size: 15px; margin: 5px 0; color: #0f172a; }
+
+.product-card .actions {
+    display: flex;
+    gap: 5px;
+    margin-top: auto;
+}
+
+.product-card .actions button {
+    flex: 1;
+    padding: 6px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.edit-btn { background-color: #eff6ff; color: #2563eb; }
+.delete-btn { background-color: #fef2f2; color: #dc2626; }
