@@ -1,0 +1,46 @@
+<div class="login-container">
+  <div class="login-card">
+    
+    <!-- اللوجو واسم السيستم متناسق مع الداشبورد -->
+    <div class="login-header">
+      <div class="logo-icon">🔵</div>
+      <h2>ICON WEAR</h2>
+      <p>Welcome back! Please login to your account.</p>
+    </div>
+
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+      
+      <!-- رسالة الخطأ الاحترافية البديلة للـ alert -->
+      <div *ngIf="errorMessage" class="error-banner">
+        ⚠️ {{ errorMessage }}
+      </div>
+
+      <div class="input-group">
+        <label>Email Address</label>
+        <input 
+          type="email" 
+          name="email"
+          placeholder="admin@iconwear.com" 
+          [(ngModel)]="email" 
+          required>
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+        <input 
+          type="password" 
+          name="password"
+          placeholder="••••••••" 
+          [(ngModel)]="password" 
+          required>
+      </div>
+
+      <!-- زرار تسجيل الدخول مع حالة الـ Loading -->
+      <button type="submit" class="login-btn" [disabled]="isLoading">
+        <span *ngIf="!isLoading">Sign In</span>
+        <span *ngIf="isLoading" class="spinner"></span>
+      </button>
+
+    </form>
+  </div>
+</div>
