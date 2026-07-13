@@ -1,0 +1,112 @@
+<div class="loading-overlay" *ngIf="isLoading">
+  <div class="main-spinner"></div>
+</div>
+
+<div class="main-dashboard-page">
+  
+  <div class="welcome-banner">
+    <div class="welcome-text">
+      <h1>Welcome Back, Admin 👋</h1>
+      <p>Everything is running smoothly. Here’s what’s happening with <strong>ICON WEAR</strong> today.</p>
+    </div>
+    <div class="welcome-img">👕</div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-main-card products-card" routerLink="/products">
+      <div class="card-icon">📦</div>
+      <div class="card-info">
+        <h3>Total Products</h3>
+        <p class="counter">{{ totalProducts }}</p>
+        <span class="click-hint">Manage Products →</span>
+      </div>
+    </div>
+
+    <div class="stat-main-card categories-card" routerLink="/categories">
+      <div class="card-icon">📂</div>
+      <div class="card-info">
+        <h3>Total Categories</h3>
+        <p class="counter">{{ totalCategories }}</p>
+        <span class="click-hint">Manage Categories →</span>
+      </div>
+    </div>
+
+    <div class="stat-main-card status-card">
+      <div class="card-icon">🟢</div>
+      <div class="card-info">
+        <h3>System Status</h3>
+        <p class="status-text">Active & Live</p>
+        <span class="status-subtext">Firebase Connected</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-content-grid">
+    
+    <div class="data-box recent-products-box">
+      <div class="box-header">
+        <h3>⏱️ Recent Added Products</h3>
+        <button routerLink="/products" class="view-all-btn">View All</button>
+      </div>
+      
+      <div class="table-container">
+        <table class="minimal-table">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Category</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let prod of recentProducts">
+              <td class="prod-name-cell">{{ prod.title || prod.name }}</td>
+              <td><span class="category-badge">{{ prod.category }}</span></td>
+              <td class="price-cell">${{ prod.price }}</td>
+            </tr>
+            <tr *ngIf="recentProducts.length === 0">
+              <td colspan="3" style="text-align: center; color: #94a3b8; padding: 20px;">No recent products found</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="data-box analytics-box">
+      <div class="box-header">
+        <h3>📊 Stock Distribution</h3>
+      </div>
+      
+      <div class="chart-wrapper">
+        <div class="progress-pie-chart" [style.background]="'conic-gradient(#3b82f6 0% ' + menPercentage + '%, #10b981 ' + menPercentage + '% 100%)'">
+          <div class="inner-circle">
+            <span>Stock</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-legends">
+        <div class="legend-item">
+          <span class="bullet blue"></span>
+          <span class="legend-label">Men's Wear ({{ menPercentage }}%)</span>
+        </div>
+        <div class="legend-item">
+          <span class="bullet green"></span>
+          <span class="legend-label">Women's Wear ({{ womenPercentage }}%)</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dashboard-footer-section">
+    <div class="info-box">
+      <h3>⚡ Quick Shortcuts</h3>
+      <div class="shortcuts-btns">
+        <button routerLink="/products" class="shortcut-btn btn-blue">+ Add New Product</button>
+        <button routerLink="/categories" class="shortcut-btn btn-green">+ Add New Category</button>
+      </div>
+    </div>
+  </div>
+
+</div>

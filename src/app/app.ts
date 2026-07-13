@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ToastService } from './toast.service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,8 @@ import { RouterModule } from '@angular/router';
 })
 export class AppComponent {
   isLoginPage = false;
+
+  public toastService = inject(ToastService);
 
   constructor(private router: Router) {
     // مراقبة مسار الصفحة الحالية

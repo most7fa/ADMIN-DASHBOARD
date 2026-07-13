@@ -1,0 +1,278 @@
+.main-dashboard-page {
+    padding: 30px;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f8fafc;
+    min-height: 100vh;
+}
+
+/* بنر الترحيب */
+.welcome-banner {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+    margin-bottom: 35px;
+}
+
+.welcome-text h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.welcome-text p {
+    margin: 10px 0 0 0;
+    color: #94a3b8;
+    font-size: 15px;
+}
+
+.welcome-img {
+    font-size: 55px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* كروت الإحصائيات */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.stat-main-card {
+    background: #ffffff;
+    padding: 26px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #e2e8f0;
+}
+
+.stat-main-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+}
+
+.card-icon {
+    font-size: 32px;
+    background: #f1f5f9;
+    width: 65px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+}
+
+.card-info h3 {
+    margin: 0;
+    font-size: 13px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.card-info .counter {
+    margin: 4px 0 0 0;
+    font-size: 34px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.click-hint {
+    font-size: 12px;
+    color: #3b82f6;
+    display: block;
+    margin-top: 6px;
+    font-weight: 600;
+}
+
+.products-card { border-left: 5px solid #3b82f6; }
+.categories-card { border-left: 5px solid #10b981; }
+.status-card { border-left: 5px solid #6366f1; cursor: default; }
+
+.status-text { margin: 4px 0 0 0; font-size: 22px; font-weight: 700; color: #10b981; }
+.status-subtext { font-size: 12px; color: #94a3b8; display: block; margin-top: 6px; }
+
+/* توزيع القسم الجديد (الجدول والرسوم البيانية) */
+.dashboard-content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* الجدول يأخذ مساحة أكبر */
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+@media (max-width: 992px) {
+    .dashboard-content-grid {
+        grid-template-columns: 1fr; /* تحت بعض في الشاشات الصغيرة */
+    }
+}
+
+.data-box {
+    background: white;
+    padding: 24px;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.box-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.view-all-btn {
+    background: #f1f5f9;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: #3b82f6;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.view-all-btn:hover { background: #e2e8f0; }
+
+/* ستايل الجدول المصغر الفخم */
+.table-container {
+    overflow-x: auto;
+}
+
+.minimal-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.minimal-table th {
+    padding: 12px;
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 600;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.minimal-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 14px;
+    color: #334155;
+}
+
+.prod-name-cell {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.price-cell {
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.category-badge {
+    background: #eff6ff;
+    color: #1d4ed8;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* ستايل الرسم البياني الدائري المصنوع بالـ CSS */
+.chart-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.progress-pie-chart {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.inner-circle {
+    width: 100px;
+    height: 100px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.chart-legends {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #475569;
+}
+
+.bullet {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.bullet.blue { background-color: #3b82f6; }
+.bullet.green { background-color: #10b981; }
+
+/* الاختصارات السفلية */
+.info-box {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+}
+
+.info-box h3 { margin: 0 0 20px 0; color: #1e293b; font-size: 16px; font-weight: 600; }
+.shortcuts-btns { display: flex; gap: 15px; flex-wrap: wrap; }
+.shortcut-btn { padding: 12px 24px; border: none; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; }
+.btn-blue { background-color: #3b82f6; color: white; }
+.btn-blue:hover { background-color: #2563eb; }
+.btn-green { background-color: #10b981; color: white; }
+.btn-green:hover { background-color: #059669; }
+
+/* اللودر */
+.loading-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(255, 255, 255, 0.7); display: flex; justify-content: center; align-items: center; z-index: 9999; }
+.main-spinner { width: 45px; height: 45px; border: 4px solid #e2e8f0; border-radius: 50%; border-top-color: #3b82f6; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }

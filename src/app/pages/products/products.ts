@@ -1,6 +1,7 @@
 import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ToastService } from '../../toast.service';
 
 import {
   Firestore,
@@ -34,10 +35,12 @@ export class ProductsComponent implements OnInit {
 
   private firestore = inject(Firestore);
   private cdr = inject(ChangeDetectorRef);
+  private toast = inject(ToastService);
 
   products: Product[] = [];
   isEditMode = false;
   editingId: string | null = null;
+  isLoading = false;
 
   currentProduct: Product = { 
     title: '', 
@@ -54,6 +57,8 @@ export class ProductsComponent implements OnInit {
   }
 
   async loadProducts() {
+    this.isLoading = true;
+    this.cdr.detectChanges();
     try {
       const ref = collection(this.firestore, 'products');
       const snap = await getDocs(ref);
@@ -62,9 +67,14 @@ export class ProductsComponent implements OnInit {
         id: doc.id,
         ...doc.data()
       })) as Product[];
-      this.cdr.detectChanges();
+
     } catch (error) {
       console.error('Error loading products:', error);
+      this.toast.show('Failed to load products', 'error');
+    }
+    finally {
+      this.isLoading = false;
+      this.cdr.detectChanges();
     }
   }
 
@@ -91,6 +101,8 @@ export class ProductsComponent implements OnInit {
       console.warn('Missing product name or price');
       return;
       }
+      this.isLoading = true;
+      this.cdr.detectChanges();
 
     const dataToSend = {
       title: productName,
@@ -106,15 +118,22 @@ export class ProductsComponent implements OnInit {
       if (this.isEditMode && this.editingId) {
         const ref = doc(this.firestore, `products/${this.editingId}`);
         await updateDoc(ref, dataToSend);
+        this.toast.show('Product updated successfully!', 'success');
+
       } else {
         const ref = collection(this.firestore, 'products');
         await addDoc(ref, dataToSend);
+        this.toast.show('Product added successfully!', 'success');
       }
 
       this.resetForm();
       await this.loadProducts();
     } catch (error) {
       console.error('Error saving product:', error);
+      this.toast.show('Error saving product', 'error');
+    } finally {
+      this.isLoading = false;
+      this.cdr.detectChanges();
     }
   }
 
@@ -137,9 +156,13 @@ export class ProductsComponent implements OnInit {
   }
 
   async deleteProduct(id: string) {
+    this.isLoading = true;
+    this.cdr.detectChanges();
     try {
       const ref = doc(this.firestore, `products/${id}`);
       await deleteDoc(ref);
+
+      this.toast.show('Product deleted successfully!', 'info');
       
       if (this.editingId === id) {
         this.resetForm();
@@ -148,6 +171,9 @@ export class ProductsComponent implements OnInit {
       await this.loadProducts();
     } catch (error) {
       console.error('Error deleting product:', error);
+      this.toast.show('Failed to delete product', 'error');
+      this.isLoading = false;
+      this.cdr.detectChanges();
     }
   }
 

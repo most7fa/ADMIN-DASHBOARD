@@ -1,6 +1,7 @@
 import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ToastService } from '../..//toast.service';
 
 import {
   Firestore,
@@ -23,13 +24,13 @@ export class CategoriesComponent implements OnInit {
 
   private firestore = inject(Firestore);
   private cdr = inject(ChangeDetectorRef);
+  private toast = inject(ToastService);
 
   categories: any[] = [];
   allCategories: any[] = [];
-
   searchText = '';
-
   editingId: string | null = null;
+  isLoading = false;
 
   newCategory = {
     name: ''
@@ -44,6 +45,8 @@ export class CategoriesComponent implements OnInit {
   }
 
   async loadCategories() {
+    this.isLoading = true;
+    this.cdr.detectChanges();
 
     try {
 
@@ -57,11 +60,14 @@ export class CategoriesComponent implements OnInit {
       }));
 
       this.categories = [...this.allCategories];
-      this.cdr.detectChanges();
 
     } catch (error) {
 
       console.error(error);
+      this.toast.show('Failed to load categories', 'error');
+    } finally {
+      this.isLoading = false;
+      this.cdr.detectChanges();
 
     }
 
@@ -88,12 +94,16 @@ export class CategoriesComponent implements OnInit {
 
     if (!this.newCategory.name.trim()) return;
 
+    this.isLoading = true;
+    this.cdr.detectChanges();
+
     try {
 
       const ref = collection(this.firestore, 'categories');
 
       await addDoc(ref, this.newCategory);
 
+      this.toast.show('Category added successfully!', 'success');
 
       this.newCategory = {
         name: ''
@@ -104,6 +114,10 @@ export class CategoriesComponent implements OnInit {
     } catch (error) {
 
       console.error(error);
+      this.toast.show('Error adding category', 'error');
+    } finally {
+      this.isLoading = false;
+      this.cdr.detectChanges();
 
     }
 
@@ -116,12 +130,15 @@ export class CategoriesComponent implements OnInit {
     this.newCategory = {
       name: category.name
     };
-
+    this.cdr.detectChanges();
   }
 
   async updateCategory() {
 
     if (!this.editingId) return;
+    
+    this.isLoading = true;
+    this.cdr.detectChanges();
 
     try {
 
@@ -134,6 +151,7 @@ export class CategoriesComponent implements OnInit {
         name: this.newCategory.name
       });
 
+      this.toast.show('Category updated successfully!', 'success');
 
       this.editingId = null;
 
@@ -146,6 +164,10 @@ export class CategoriesComponent implements OnInit {
     } catch (error) {
 
       console.error(error);
+      this.toast.show('Error updating category', 'error');
+    } finally {
+      this.isLoading = false;
+      this.cdr.detectChanges();
 
     }
 
@@ -153,6 +175,8 @@ export class CategoriesComponent implements OnInit {
 
   async deleteCategory(id: string) {
 
+    this.isLoading = true;
+    this.cdr.detectChanges();
 
     try {
 
@@ -163,12 +187,16 @@ export class CategoriesComponent implements OnInit {
 
       await deleteDoc(ref);
 
+      this.toast.show('Category deleted successfully!', 'info');
 
       await this.loadCategories();
 
     } catch (error) {
 
       console.error(error);
+      this.toast.show('Failed to delete category', 'error');
+      this.isLoading = false;
+      this.cdr.detectChanges();
 
     }
 

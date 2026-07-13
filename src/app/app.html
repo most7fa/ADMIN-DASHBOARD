@@ -1,3 +1,11 @@
+<div class="toast-container" *ngIf="toastService.toast()" [ngClass]="toastService.toast()?.type">
+  <span class="toast-icon">
+    <span *ngIf="toastService.toast()?.type === 'success'">✅</span>
+    <span *ngIf="toastService.toast()?.type === 'error'">❌</span>
+  </span>
+  <p class="toast-text">{{ toastService.toast()?.text }}</p>
+</div>
+
 <div class="dashboard-container" *ngIf="!isLoginPage">
   
   <aside class="sidebar">
@@ -16,9 +24,6 @@
       </a>
       <a routerLink="/products" routerLinkActive="active" class="menu-item">
         <span class="icon">📦</span> Products
-      </a>
-      <a routerLink="/statistics" routerLinkActive="active" class="menu-item">
-        <span class="icon">📈</span> Statistics
       </a>
     </nav>
     

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login';
 import { ProductsComponent } from './pages/products/products';
 import { CategoriesComponent } from './pages/categories/categories';
+import { DashboardComponent } from './pages/dashboard/dashboard';
 import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
@@ -9,9 +10,12 @@ export const routes: Routes = [
     path: '',
     component: LoginComponent
   },
+  { path: '', redirectTo: 'dashboard', 
+    pathMatch: 'full' 
+  },
   {
     path: 'dashboard',
-    component: ProductsComponent,
+    component: DashboardComponent,
     canActivate: [authGuard]
   },
   {
@@ -24,9 +28,4 @@ export const routes: Routes = [
     component: ProductsComponent,
     canActivate: [authGuard]
   },
-  {
-    path: 'statistics',
-    component: ProductsComponent,
-    canActivate: [authGuard]
-  }
 ];
