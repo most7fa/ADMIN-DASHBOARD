@@ -141,6 +141,43 @@
     overflow-y: auto;
 }
 
+/* --- الزرار العائم الافتراضي (مخفي على الكمبيوتر) --- */
+.mobile-menu-trigger {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001; /* أعلى من السايدبار وأي محتوى */
+    background-color: #3b82f6; /* لون أزرق مميز */
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 24px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.mobile-menu-trigger:active {
+    transform: scale(0.9);
+}
+
+/* --- إظهار الزرار فقط في شاشات الموبايل والتابلت --- */
+@media (max-width: 768px) {
+    .mobile-menu-trigger {
+        display: flex; /* يظهر فقط على الموبايل */
+    }
+    
+    /* نضمن إن المحتوى ميتداخلش مع الزرار العائم */
+    .main-content {
+        padding-top: 60px; 
+    }
+}
+
 /* ===================================================
    شاشات الموبايل والتابلت (Responsive Breakpoint)
 =================================================== */

@@ -7,6 +7,10 @@
 </div>
 
 <div class="dashboard-container" *ngIf="!isLoginPage" [class.sidebar-collapsed]="isSidebarCollapsed">
+
+  <button class="mobile-menu-trigger" *ngIf="isSidebarCollapsed" (click)="toggleSidebar()">
+    <i class="bi bi-list"></i>
+  </button>
   
   <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
     
