@@ -44,8 +44,64 @@
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.dashboard-charts-grid, .dashboard-content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* الافتراضي للـ Desktop */
     gap: 25px;
-    margin-bottom: 35px;
+    margin-bottom: 30px;
+}
+
+/* --- بنر الترحيب للموبايل --- */
+@media (max-width: 768px) {
+    .welcome-banner {
+        flex-direction: column; /* الكلام فوق والأيقونة تحت */
+        text-align: center;
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .welcome-img {
+        font-size: 35px;
+    }
+
+    /* تحويل الرسوم البيانية والجداول لتكون عمودية تحت بعض */
+    .dashboard-charts-grid, .dashboard-content-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* تظبيط أزرار الـ Quick Actions */
+    .shortcuts-btns {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .shortcut-btn {
+        width: 100%; /* الزرار يأخذ عرض الشاشة بالكامل */
+        text-align: center;
+    }
+    
+    /* الـ Navbar العلوي */
+    .dashboard-navbar {
+        padding: 15px 20px;
+    }
+    .nav-brand h2 {
+        font-size: 14px; /* تصغير الخط */
+    }
+}
+
+/* --- حماية الجداول من التمدد خارج الشاشة --- */
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* يظهر سكرول أفقي ناعم جوه الجدول نفسه لو الكلام كتير */
+    -webkit-overflow-scrolling: touch;
+}
+
+.minimal-table {
+    min-width: 500px; /* نضمن إن الجدول يفضل مقروء ومفروض والـ Scroll يشتغل صح */
 }
 
 .stat-main-card {
