@@ -16,6 +16,12 @@ export class AppComponent {
 
   public toastService = inject(ToastService);
 
+  isSidebarCollapsed = false;
+
+  toggleSidebar() {
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
+  }
+
   constructor(private router: Router) {
     // مراقبة مسار الصفحة الحالية
     this.router.events.subscribe((event) => {
